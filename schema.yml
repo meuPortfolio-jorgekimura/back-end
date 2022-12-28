@@ -1,0 +1,165 @@
+openapi: 3.0.3
+info:
+  title: meuPortfolio API
+  version: 1.0.0
+  description: Aplicação com o objetivo de cadastrar e listar projetos e tecnologias
+paths:
+  /api/projects/:
+    get:
+      operationId: api_projects_list
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+          description: ''
+    post:
+      operationId: api_projects_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Project'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Project'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: ''
+  /api/techs/:
+    get:
+      operationId: api_techs_list
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tech'
+          description: ''
+    post:
+      operationId: api_techs_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tech'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Tech'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Tech'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tech'
+          description: ''
+components:
+  schemas:
+    Link:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        git_hub:
+          type: string
+          maxLength: 200
+        vercel:
+          type: string
+          maxLength: 200
+      required:
+      - git_hub
+      - id
+      - vercel
+    Project:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        objective:
+          type: string
+        img_url:
+          type: string
+          maxLength: 200
+        title:
+          type: string
+          maxLength: 100
+        links:
+          $ref: '#/components/schemas/Link'
+        techs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tech'
+      required:
+      - id
+      - img_url
+      - links
+      - objective
+      - techs
+      - title
+    Tech:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 50
+        img_url:
+          type: string
+          maxLength: 200
+      required:
+      - id
+      - img_url
+      - name
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

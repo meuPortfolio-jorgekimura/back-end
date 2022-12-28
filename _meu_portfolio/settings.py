@@ -46,7 +46,7 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     "rest_framework",
-    # "drf_spectacular",
+    "drf_spectacular",
 ]
 
 MY_APPS = ["projects", "techs"]
@@ -144,13 +144,13 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-# }
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
 
-# SPECTACULAR_SETTINGS = {
-#     'TITLE': 'meuPortfolio API',
-#     'DESCRIPTION': 'Aplicação com o objetivo de criar e listar projetos e tecnologias',
-#     'VERSION': '1.0.0',
-#     'SERVE_INCLUDE_SCHEMA': False,
-# }
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'meuPortfolio API',
+    'DESCRIPTION': 'Aplicação com o objetivo de cadastrar e listar projetos e tecnologias',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
